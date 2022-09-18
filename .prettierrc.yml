@@ -1,0 +1,12 @@
+# default overrides
+trailingComma: all
+printWidth: 80
+
+# @trivago/prettier-plugin-sort-imports
+importOrderSeparation: true
+importOrder:
+  - ^source-map-support/register
+  # code from this repo
+  - ^@todos/(.*)$
+  # others
+  - <THIRD_PARTY_MODULES>
