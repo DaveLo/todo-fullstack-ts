@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/todos/feature/create/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/todos/feature/create/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/todos/feature/create"],
+      "options": {
+        "jestConfig": "libs/todos/feature/create/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:feature", "scope:todos"]
+}

@@ -66,5 +66,8 @@
       }
     }
   },
-  "defaultProject": "web"
+  "defaultProject": "web",
+  "cli": {
+    "defaultCollection": "@ns3/nx-serverless"
+  }
 }

@@ -18,7 +18,9 @@
     "@nrwl/cypress": "14.7.5",
     "@nrwl/eslint-plugin-nx": "14.7.5",
     "@nrwl/jest": "14.7.5",
+    "@nrwl/js": "^14.7.5",
     "@nrwl/linter": "14.7.5",
+    "@nrwl/node": "^14.7.5",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "^14.7.5",
     "@nrwl/storybook": "^14.7.5",
@@ -58,7 +60,10 @@
     "postcss": "8.4.16",
     "prettier": "2.7.1",
     "react-test-renderer": "18.2.0",
+    "serverless": "^3.21.0",
+    "serverless-bundle": "^5.4.0",
     "serverless-localstack": "^1.0.0",
+    "serverless-offline": "^9.2.0",
     "serverless-prune-plugin": "^2.0.1",
     "tailwindcss": "3.1.8",
     "ts-jest": "28.0.5",
@@ -67,11 +72,16 @@
     "url-loader": "^3.0.0"
   },
   "dependencies": {
+    "@trpc/client": "^9.27.2",
+    "@trpc/react": "^9.27.2",
+    "@trpc/server": "^9.27.2",
     "core-js": "^3.6.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.3.0"
+    "source-map-support": "^0.5.21",
+    "tslib": "^2.3.0",
+    "zod": "^3.19.1"
   }
 }
