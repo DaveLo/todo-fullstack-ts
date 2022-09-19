@@ -1,1 +1,1 @@
-export * from "./lib/schemas-todos";
+export * from "./types/task";
