@@ -10,3 +10,4 @@ importOrder:
   - ^@todos/(.*)$
   # others
   - <THIRD_PARTY_MODULES>
+  - .css$
