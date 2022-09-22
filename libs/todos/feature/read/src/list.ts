@@ -5,10 +5,10 @@ import type { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
 /**
  * Sends along list of todos, optionally filtered
- * @param userId unique user id
  * @param input potential filter case for query
  * @param db document client instance
  * @param tableName table to query
+ * @param userId unique user id
  * @returns list of todos
  */
 export async function todosFeatureList(

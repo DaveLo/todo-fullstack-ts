@@ -11,6 +11,8 @@ import { dbClient } from "../environments/db.local";
 const { TABLE_NAME } = process.env;
 
 const db = DynamoDBDocumentClient.from(dbClient);
+
+/** Parses request/response data for API GW */
 export async function httpListRequest(
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> {
