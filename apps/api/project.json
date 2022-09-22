@@ -6,7 +6,9 @@
     "serve": {
       "executor": "@ns3/nx-serverless:sls",
       "options": {
-        "command": "offline"
+        "command": "offline start",
+        "stage": "local",
+        "noPrependStageInUrl": true
       }
     },
     "package": {
@@ -20,6 +22,16 @@
       ],
       "options": {
         "command": "package"
+      },
+      "configurations": {
+        "local": {
+          "fileReplacements": [
+            {
+              "replace": "apps/api/src/environments/setup/db.ts",
+              "with": "apps/api/src/environments/setup/db.local.ts"
+            }
+          ]
+        }
       }
     },
     "deploy": {

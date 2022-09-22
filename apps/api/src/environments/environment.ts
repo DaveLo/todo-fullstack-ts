@@ -8,4 +8,6 @@ export const environment = {
   region: AWS_REGION,
   production: IS_PRODUCTION,
   offline: IS_OFFLINE,
+  ...(IS_OFFLINE && { dynamolocal: "https//localhost:8000" }),
 } as const;
+export default environment;

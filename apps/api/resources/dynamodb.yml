@@ -1,0 +1,34 @@
+Resources:
+  TodoTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: TaskId
+          AttributeType: S
+        - AttributeName: Status_TaskId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: TaskId
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: ByTask
+          KeySchema:
+            - AttributeName: TaskId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      LocalSecondaryIndexes:
+        - IndexName: byStatus
+          KeySchema:
+            - AttributeName: PK
+              KeyType: HASH
+            - AttributeName: Status_TaskId
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL

@@ -1,0 +1,13 @@
+createTodo:
+  handler: src/todos/create.handler
+  events:
+    - http:
+        path: api/tasks
+        method: post
+
+readTodo:
+  handler: src/todos/create.handler
+  events:
+    - http:
+        path: api/tasks
+        method: get

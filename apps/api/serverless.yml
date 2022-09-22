@@ -3,31 +3,41 @@ service: api
 plugins:
   - serverless-bundle
   - serverless-offline
+  - serverless-dynamodb-local
+  - serverless-prune-plugin
 
 package:
   individually: true
 
 custom:
-  serverless-offline:
-    httpPort: 3333
-    lambdaPort: 2333
-    noPrependStageInUrl: true
   bundle:
     linting: false
     tsConfig: "tsconfig.app.json"
+  offline:
+    httpPort: 3333
+    lambdaPort: 2222
+    noPrependStageInUrl: true
+  dynamodb:
+    stages:
+      - local
+    start:
+      docker: true
+      port: 8000
+      inMemory: true
+      convertEmptyValues: true
+      # migrate: false
 
 params:
   prod:
     stage: prod
     production: true
   default:
-    stage: dev
+    stage: ${opt:stage, 'dev'}
     production: false
 
 provider:
   name: aws
   runtime: nodejs16.x
-  endpointType: regional
   timeout: 20
   environment:
     APP_ENV: ${param:stage}
@@ -36,3 +46,6 @@ provider:
 
 functions:
   - ${file(src/todos/handlers.yml)}
+
+resources:
+  - ${file(resources/dynamodb.yml)}
