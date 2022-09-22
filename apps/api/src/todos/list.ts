@@ -1,6 +1,7 @@
 import "source-map-support/register";
 
 import { todosFeatureList } from "@todos/todos-feature-read";
+import { errorApiHelper } from "@todos/utils/errors";
 
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
@@ -29,11 +30,7 @@ export async function httpListRequest(
     };
   } catch (error) {
     console.error(error);
-
-    return {
-      statusCode: 500,
-      body: JSON.stringify(error),
-    };
+    return errorApiHelper(error);
   }
 }
 
