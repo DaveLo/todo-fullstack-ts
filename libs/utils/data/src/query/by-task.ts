@@ -1,37 +1,27 @@
-import type { TaskFiltersType } from "@todos/schemas/todos";
-
 import { QueryCommand, type QueryCommandOutput } from "@aws-sdk/lib-dynamodb";
 import type { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
 /**
- * Gets list of tasks, optionally filters
- * on task status
+ * Finds a task by it's unique ID.
  * @param db document client instance
  * @param tableName table key
  * @param userId unique user ID
- * @param filter optional filter condition
- * @returns list of task objects
+ * @param taskId unique task ID
+ * @returns task object
  */
-export function queryByStatus(
+export function queryByTask(
   db: DynamoDBDocumentClient,
   tableName: string,
   userId: string,
-  filter?: Omit<TaskFiltersType, "ALL">,
+  taskId: string,
 ): Promise<QueryCommandOutput> {
-  let query = "userId = :userId";
-
-  if (filter) {
-    query += " and begins_with(status_taskId, :statusFilter)";
-  }
-
   try {
     const request = new QueryCommand({
       TableName: tableName,
-      IndexName: "byStatus",
-      KeyConditionExpression: query,
+      KeyConditionExpression: "userId = :userId and taskId = :taskId",
       ExpressionAttributeValues: {
         ":userId": userId,
-        ...(filter && { ":statusFilter": filter }),
+        ":taskId": taskId,
       },
     });
 
