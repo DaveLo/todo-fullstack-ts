@@ -8,6 +8,7 @@
     "todos-feature-create": "libs/todos/feature/create",
     "todos-feature-read": "libs/todos/feature/read",
     "utils-data": "libs/utils/data",
+    "utils-errors": "libs/utils/errors",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }
