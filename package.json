@@ -23,19 +23,13 @@
     "@nrwl/node": "^14.7.5",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "^14.7.5",
-    "@nrwl/storybook": "^14.7.5",
     "@nrwl/web": "14.7.5",
     "@nrwl/workspace": "14.7.5",
     "@ns3/nx-serverless": "^3.1.2",
-    "@storybook/addon-a11y": "^6.5.12",
-    "@storybook/addon-essentials": "~6.5.12",
-    "@storybook/builder-webpack5": "~6.5.12",
-    "@storybook/core-server": "~6.5.12",
-    "@storybook/manager-webpack5": "~6.5.12",
-    "@storybook/react": "~6.5.12",
     "@svgr/webpack": "^6.3.1",
     "@testing-library/react": "13.4.0",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/aws-lambda": "^8.10.104",
     "@types/jest": "29.0.3",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",
@@ -47,6 +41,7 @@
     "babel-jest": "28.1.1",
     "babel-loader": "8.1.0",
     "cypress": "^10.7.0",
+    "dynamodb-migrations": "^0.0.10",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
@@ -62,6 +57,7 @@
     "react-test-renderer": "18.2.0",
     "serverless": "^3.21.0",
     "serverless-bundle": "^5.4.0",
+    "serverless-dynamodb-local": "git+ssh://git@github.com:99x/serverless-dynamodb-local.git",
     "serverless-localstack": "^1.0.0",
     "serverless-offline": "^9.2.0",
     "serverless-prune-plugin": "^2.0.1",
@@ -71,6 +67,8 @@
     "url-loader": "^3.0.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.172.0",
+    "@aws-sdk/lib-dynamodb": "^3.172.0",
     "@tanstack/react-query": "^4.3.9",
     "core-js": "^3.6.5",
     "react": "18.2.0",
@@ -80,5 +78,8 @@
     "source-map-support": "^0.5.21",
     "tslib": "^2.3.0",
     "zod": "^3.19.1"
+  },
+  "msw": {
+    "workerDirectory": "apps/web/src"
   }
 }
