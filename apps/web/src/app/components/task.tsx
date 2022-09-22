@@ -1,5 +1,7 @@
 import type { TaskType } from "@todos/schemas/todos";
 
+import { PinButton } from "./inputs/pin-button";
+
 export interface TaskProps {
   task: TaskType;
   onArchiveTask: (id: string) => void;
@@ -15,7 +17,6 @@ export function Task(props: TaskProps) {
   const {
     task: { id, title, state },
     onArchiveTask,
-    onPinTask,
   } = props;
 
   return (
@@ -44,17 +45,7 @@ export function Task(props: TaskProps) {
         />
       </label>
 
-      {state !== "TASK_ARCHIVED" && (
-        <button
-          className="pin-button"
-          onClick={() => onPinTask(id)}
-          id={`pinTask-${id}`}
-          aria-label={`pinTask-${id}`}
-          key={`pinTask-${id}`}
-        >
-          <span className="icon-star" />
-        </button>
-      )}
+      {state !== "TASK_ARCHIVED" && <PinButton id={id} />}
     </article>
   );
 }

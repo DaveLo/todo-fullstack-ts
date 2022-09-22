@@ -1,9 +1,8 @@
 import type { TaskType } from "@todos/schemas/todos";
 
-import { getTasks, updateArchiveTask } from "../api/tasks";
-import Task from "./task";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
+
+import Task from "./task";
 
 /** Low level wrapper component for list */
 const Container = ({ children }: { children: ReactNode }) => (
@@ -77,33 +76,4 @@ export function TaskList(props: TaskListProps) {
   );
 }
 
-/**
- * Manage state/querying backend task data
- * @returns Connected task list
- */
-export default function () {
-  const client = useQueryClient();
-  const { isLoading, isSuccess, data } = useQuery(["tasks", "list"], getTasks);
-
-  const archive = useMutation((task: TaskType) => updateArchiveTask(task), {
-    onSuccess: (updatedTask) => {},
-  });
-  const pinTask = (id: string) => {};
-  const archiveTask = (taskId: string) => {
-    if (data) {
-      const task = data.find(({ id }) => id === taskId);
-      if (!task) {
-        return;
-      }
-    }
-  };
-
-  return (
-    <TaskList
-      loading={isLoading}
-      tasks={isSuccess ? data : []}
-      onArchiveTask={archiveTask}
-      onPinTask={pinTask}
-    />
-  );
-}
+export default TaskList;
