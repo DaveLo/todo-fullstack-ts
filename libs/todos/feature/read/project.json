@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": ["type:features", "scope:todos"]
+  "tags": ["type:feature", "scope:todos"]
 }

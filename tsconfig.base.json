@@ -19,7 +19,8 @@
       "@todos/schemas/api": ["libs/schemas/api/src/index.ts"],
       "@todos/schemas/todos": ["libs/schemas/todos/src/index.ts"],
       "@todos/todos-feature-read": ["libs/todos/feature/read/src/index.ts"],
-      "@todos/todos/feature/create": ["libs/todos/feature/create/src/index.ts"]
+      "@todos/todos/feature/create": ["libs/todos/feature/create/src/index.ts"],
+      "@todos/utils/data": ["libs/utils/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

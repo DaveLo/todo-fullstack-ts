@@ -1,1 +1,1 @@
-export * from "./lib/todos-feature-list";
+export * from "./list";

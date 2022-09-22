@@ -5,9 +5,11 @@ createTodo:
         path: api/tasks
         method: post
 
-readTodo:
-  handler: src/todos/create.handler
+listTodos:
+  handler: src/todos/list.handler
   events:
     - http:
         path: api/tasks
         method: get
+        querystrings:
+          url: true

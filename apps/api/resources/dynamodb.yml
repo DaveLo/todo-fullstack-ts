@@ -5,30 +5,30 @@ Resources:
     Properties:
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
-        - AttributeName: PK
+        - AttributeName: userId
           AttributeType: S
-        - AttributeName: TaskId
+        - AttributeName: taskId
           AttributeType: S
-        - AttributeName: Status_TaskId
+        - AttributeName: status_taskId
           AttributeType: S
       KeySchema:
-        - AttributeName: PK
+        - AttributeName: userId
           KeyType: HASH
-        - AttributeName: TaskId
+        - AttributeName: taskId
           KeyType: RANGE
       GlobalSecondaryIndexes:
         - IndexName: ByTask
           KeySchema:
-            - AttributeName: TaskId
+            - AttributeName: taskId
               KeyType: HASH
           Projection:
             ProjectionType: ALL
       LocalSecondaryIndexes:
         - IndexName: byStatus
           KeySchema:
-            - AttributeName: PK
+            - AttributeName: userId
               KeyType: HASH
-            - AttributeName: Status_TaskId
+            - AttributeName: status_taskId
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
