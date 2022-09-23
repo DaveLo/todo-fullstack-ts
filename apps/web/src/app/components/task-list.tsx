@@ -1,9 +1,8 @@
 import type { TaskType } from "@todos/schemas/todos";
 
-import { getTasks, updateArchiveTask } from "../api/tasks";
-import Task from "./task";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
+
+import Task from "./task";
 
 /** Low level wrapper component for list */
 const Container = ({ children }: { children: ReactNode }) => (
@@ -64,46 +63,17 @@ export function TaskList(props: TaskListProps) {
   }
 
   const orderedTasks = [
-    ...tasks.filter(({ state }) => state === "TASK_PINNED"),
-    ...tasks.filter(({ state }) => state !== "TASK_PINNED"),
+    ...tasks.filter(({ status }) => status === "TASK_PINNED"),
+    ...tasks.filter(({ status }) => status !== "TASK_PINNED"),
   ];
 
   return (
     <Container>
       {orderedTasks.map((task) => (
-        <Task key={task.id} task={task} {...events} />
+        <Task key={task.taskId} task={task} {...events} />
       ))}
     </Container>
   );
 }
 
-/**
- * Manage state/querying backend task data
- * @returns Connected task list
- */
-export default function () {
-  const client = useQueryClient();
-  const { isLoading, isSuccess, data } = useQuery(["tasks", "list"], getTasks);
-
-  const archive = useMutation((task: TaskType) => updateArchiveTask(task), {
-    onSuccess: (updatedTask) => {},
-  });
-  const pinTask = (id: string) => {};
-  const archiveTask = (taskId: string) => {
-    if (data) {
-      const task = data.find(({ id }) => id === taskId);
-      if (!task) {
-        return;
-      }
-    }
-  };
-
-  return (
-    <TaskList
-      loading={isLoading}
-      tasks={isSuccess ? data : []}
-      onArchiveTask={archiveTask}
-      onPinTask={pinTask}
-    />
-  );
-}
+export default TaskList;

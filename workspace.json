@@ -6,6 +6,10 @@
     "schemas-api": "libs/schemas/api",
     "schemas-todos": "libs/schemas/todos",
     "todos-feature-create": "libs/todos/feature/create",
+    "todos-feature-read": "libs/todos/feature/read",
+    "todos-feature-update": "libs/todos/feature/update",
+    "utils-data": "libs/utils/data",
+    "utils-errors": "libs/utils/errors",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e"
   }

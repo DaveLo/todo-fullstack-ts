@@ -57,7 +57,10 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "rules": {
+        "ignoreRestSiblings": 0,
+        "no-useless-catch": 0
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

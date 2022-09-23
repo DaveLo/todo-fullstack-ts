@@ -1,5 +1,7 @@
 import type { TaskType } from "@todos/schemas/todos";
 
+import { PinButton } from "./inputs/pin-button";
+
 export interface TaskProps {
   task: TaskType;
   onArchiveTask: (id: string) => void;
@@ -13,26 +15,28 @@ export interface TaskProps {
  */
 export function Task(props: TaskProps) {
   const {
-    task: { id, title, state },
+    task: { taskId, title, status },
     onArchiveTask,
-    onPinTask,
   } = props;
 
   return (
-    <article className={`list-item ${state}`}>
+    <article className={`list-item ${status}`}>
       <label
         htmlFor="checked"
-        aria-label={`archiveTask-${id}`}
+        aria-label={`archiveTask-${taskId}`}
         className="checkbox"
       >
         <input
           type="checkbox"
           disabled={true}
           name="checked"
-          id={`archiveTask-${id}`}
-          checked={state === "TASK_ARCHIVED"}
+          id={`archiveTask-${taskId}`}
+          checked={status === "TASK_ARCHIVED"}
         />
-        <span className="checkbox-custom" onClick={() => onArchiveTask(id)} />
+        <span
+          className="checkbox-custom"
+          onClick={() => onArchiveTask(taskId)}
+        />
       </label>
       <label className="title" htmlFor="title" aria-label={title}>
         <input
@@ -44,17 +48,7 @@ export function Task(props: TaskProps) {
         />
       </label>
 
-      {state !== "TASK_ARCHIVED" && (
-        <button
-          className="pin-button"
-          onClick={() => onPinTask(id)}
-          id={`pinTask-${id}`}
-          aria-label={`pinTask-${id}`}
-          key={`pinTask-${id}`}
-        >
-          <span className="icon-star" />
-        </button>
-      )}
+      {status !== "TASK_ARCHIVED" && <PinButton id={taskId} />}
     </article>
   );
 }

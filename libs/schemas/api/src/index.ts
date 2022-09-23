@@ -1,1 +1,1 @@
-export * from "./lib/schemas-api";
+export * from "./error";

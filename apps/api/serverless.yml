@@ -3,36 +3,43 @@ service: api
 plugins:
   - serverless-bundle
   - serverless-offline
+  - serverless-prune-plugin
 
 package:
   individually: true
 
 custom:
-  serverless-offline:
-    httpPort: 3333
-    lambdaPort: 2333
-    noPrependStageInUrl: true
   bundle:
     linting: false
     tsConfig: "tsconfig.app.json"
+  offline:
+    httpPort: 3333
+    lambdaPort: 2222
+    noPrependStageInUrl: true
 
 params:
   prod:
     stage: prod
     production: true
+  local:
+    table: todos
   default:
-    stage: dev
+    stage: ${opt:stage, 'dev'}
     production: false
+    table: !Ref TodoTable
 
 provider:
   name: aws
   runtime: nodejs16.x
-  endpointType: regional
   timeout: 20
   environment:
     APP_ENV: ${param:stage}
     IS_PRODUCTION: ${param:production}
     NODE_OPTIONS: --enable-source-maps
+    TABLE_NAME: ${param:table}
 
 functions:
   - ${file(src/todos/handlers.yml)}
+
+resources:
+  - ${file(resources/dynamodb.yml)}
