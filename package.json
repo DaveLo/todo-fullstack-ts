@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "serve:web": "nx run web:serve",
+    "serve:db-local": "nx run api:dynamodb",
+    "serve:api": "nx run api:serve",
+    "start": "concurrently \"npm:serve:*\"",
     "build": "nx build",
     "test": "nx test",
     "prepare": "husky install"
@@ -43,6 +46,7 @@
     "aws-sdk-client-mock-jest": "^2.0.0",
     "babel-jest": "28.1.1",
     "babel-loader": "8.1.0",
+    "concurrently": "^7.4.0",
     "cypress": "^10.7.0",
     "dynamodb-migrations": "^0.0.10",
     "eslint": "~8.15.0",

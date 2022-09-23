@@ -8,7 +8,9 @@
       "options": {
         "command": "offline start",
         "stage": "local",
-        "noPrependStageInUrl": true
+        "noPrependStageInUrl": true,
+        "region": "local",
+        "aws-profile": "local"
       }
     },
     "dynamodb": {
