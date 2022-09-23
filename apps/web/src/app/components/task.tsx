@@ -15,25 +15,28 @@ export interface TaskProps {
  */
 export function Task(props: TaskProps) {
   const {
-    task: { id, title, state },
+    task: { taskId, title, status },
     onArchiveTask,
   } = props;
 
   return (
-    <article className={`list-item ${state}`}>
+    <article className={`list-item ${status}`}>
       <label
         htmlFor="checked"
-        aria-label={`archiveTask-${id}`}
+        aria-label={`archiveTask-${taskId}`}
         className="checkbox"
       >
         <input
           type="checkbox"
           disabled={true}
           name="checked"
-          id={`archiveTask-${id}`}
-          checked={state === "TASK_ARCHIVED"}
+          id={`archiveTask-${taskId}`}
+          checked={status === "TASK_ARCHIVED"}
         />
-        <span className="checkbox-custom" onClick={() => onArchiveTask(id)} />
+        <span
+          className="checkbox-custom"
+          onClick={() => onArchiveTask(taskId)}
+        />
       </label>
       <label className="title" htmlFor="title" aria-label={title}>
         <input
@@ -45,7 +48,7 @@ export function Task(props: TaskProps) {
         />
       </label>
 
-      {state !== "TASK_ARCHIVED" && <PinButton id={id} />}
+      {status !== "TASK_ARCHIVED" && <PinButton id={taskId} />}
     </article>
   );
 }

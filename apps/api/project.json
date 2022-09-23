@@ -11,6 +11,13 @@
         "noPrependStageInUrl": true
       }
     },
+    "dynamodb": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker-compose up",
+        "cwd": "apps/api/local/setup-dynamo"
+      }
+    },
     "package": {
       "executor": "@ns3/nx-serverless:sls",
       "outputs": ["apps/api/.serverless", "dist/apps/api"],

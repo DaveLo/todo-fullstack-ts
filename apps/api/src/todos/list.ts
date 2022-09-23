@@ -3,10 +3,11 @@ import "source-map-support/register";
 import { todosFeatureList } from "@todos/todos-feature-read";
 import { errorApiHelper } from "@todos/utils/errors";
 
+import { ListTablesCommand } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-import { dbClient } from "../environments/db";
+import { dbClient } from "../environments/db.local";
 
 const { TABLE_NAME } = process.env;
 
@@ -20,7 +21,8 @@ export async function httpListRequest(
     if (TABLE_NAME === undefined) {
       throw new Error("Missing table name config");
     }
-
+    const x = await db.send(new ListTablesCommand({}));
+    console.log(x);
     const { queryStringParameters } = event;
     const filter = queryStringParameters?.["filter"] ?? "ALL";
 

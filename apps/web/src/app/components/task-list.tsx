@@ -63,14 +63,14 @@ export function TaskList(props: TaskListProps) {
   }
 
   const orderedTasks = [
-    ...tasks.filter(({ state }) => state === "TASK_PINNED"),
-    ...tasks.filter(({ state }) => state !== "TASK_PINNED"),
+    ...tasks.filter(({ status }) => status === "TASK_PINNED"),
+    ...tasks.filter(({ status }) => status !== "TASK_PINNED"),
   ];
 
   return (
     <Container>
       {orderedTasks.map((task) => (
-        <Task key={task.id} task={task} {...events} />
+        <Task key={task.taskId} task={task} {...events} />
       ))}
     </Container>
   );

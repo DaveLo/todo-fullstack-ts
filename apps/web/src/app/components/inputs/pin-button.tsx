@@ -15,7 +15,7 @@ export function action(queryClient: QueryClient) {
   };
 }
 
-export function PinButton({ id }: { id: TaskType["id"] }) {
+export function PinButton({ id }: { id: TaskType["taskId"] }) {
   const fetcher = useFetcher();
 
   return (

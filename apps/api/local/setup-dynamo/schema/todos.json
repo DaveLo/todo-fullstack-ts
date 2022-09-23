@@ -1,0 +1,67 @@
+{
+  "TableName": "todos",
+  "KeySchema": [
+    {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "taskId",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "taskId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "status_taskId",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 5
+  },
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "ByTask",
+      "KeySchema": [
+        {
+          "AttributeName": "taskId",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 5
+      }
+    }
+  ],
+  "LocalSecondaryIndexes": [
+    {
+      "IndexName": "byStatus",
+      "KeySchema": [
+        {
+          "AttributeName": "userId",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "status_taskId",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    }
+  ]
+}

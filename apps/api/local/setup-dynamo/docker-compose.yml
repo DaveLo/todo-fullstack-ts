@@ -1,0 +1,46 @@
+version: "3"
+services:
+  dynamodb:
+    image: amazon/dynamodb-local:1.20.0
+    container_name: local-dynamodb
+    hostname: local-dynamodb
+    volumes:
+      - app_dynamodb:/home/dynamodblocal
+    working_dir: /home/dynamodblocal
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+  dynamodb_migrator:
+    image: banst/awscli:1.18.76
+    container_name: app-dynamodb_migrator
+    working_dir: /home/dynamodblocal
+    command: dynamodb create-table --cli-input-json file://todos.json --endpoint-url http://dynamodb:8000
+    volumes:
+      - ./schema:/home/dynamodblocal
+    environment:
+      - AWS_ACCESS_KEY_ID=X
+      - AWS_SECRET_ACCESS_KEY=Y
+      - AWS_DEFAULT_REGION=local
+    depends_on:
+      - dynamodb
+
+  dynamodb_seeder:
+    image: banst/awscli:1.18.76
+    container_name: app-dynamodb_seeder
+    working_dir: /home/dynamodblocal
+    command: dynamodb batch-write-item --request-items file://todos-seed.json --endpoint-url http://dynamodb:8000
+    volumes:
+      - ./schema:/home/dynamodblocal
+    environment:
+      - AWS_ACCESS_KEY_ID=X
+      - AWS_SECRET_ACCESS_KEY=Y
+      - AWS_DEFAULT_REGION=local
+    depends_on:
+      - dynamodb_migrator
+      - dynamodb
+    restart: on-failure
+
+volumes:
+  app_dynamodb:
+    driver: local
