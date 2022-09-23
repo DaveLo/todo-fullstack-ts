@@ -1,9 +1,11 @@
 import type { TaskType } from "@todos/schemas/todos";
 
+// mock impl
 export async function updateArchiveTask(task: TaskType): Promise<TaskType> {
   return { ...task, status: "TASK_ARCHIVED" };
 }
 
-export async function updateTogglePin(id: TaskType["taskId"]) {
-  return "";
+// mock impl
+export async function updateTogglePin(task: TaskType): Promise<TaskType> {
+  return { ...task, status: "TASK_PINNED" };
 }
