@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { todosFeatureList } from "@todos/todos-feature-read";
+import { todosFeatureUpdate } from "@todos/todos/feature/update";
 import { errorApiHelper } from "@todos/utils/errors";
 
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
@@ -13,7 +13,7 @@ const { TABLE_NAME } = process.env;
 const db = DynamoDBDocumentClient.from(dbClient);
 
 /** Parses request/response data for API GW */
-export async function httpListRequest(
+export async function httpCreateRequest(
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> {
   try {
@@ -21,14 +21,16 @@ export async function httpListRequest(
       throw new Error("Missing table name config");
     }
 
-    const { queryStringParameters } = event;
-    const filter = queryStringParameters?.["filter"] ?? "ALL";
+    if (!event.body || event.body === null) {
+      throw new Error("Missing request body");
+    }
 
-    const result = await todosFeatureList(filter, db, TABLE_NAME);
+    const request = JSON.parse(event.body);
+    const response = await todosFeatureUpdate(db, TABLE_NAME, request);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result),
+      body: JSON.stringify(response),
     };
   } catch (error) {
     console.error(error);
@@ -36,4 +38,4 @@ export async function httpListRequest(
   }
 }
 
-export const handler = httpListRequest;
+export const handler = httpCreateRequest;

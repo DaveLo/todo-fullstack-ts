@@ -1,11 +1,5 @@
-import {
-  Task,
-  TaskFilters,
-  TaskInput,
-  TaskInputType,
-  type TaskType,
-} from "@todos/schemas/todos";
-import { mutateCreate, queryByStatus } from "@todos/utils/data";
+import { TaskInput, type TaskType } from "@todos/schemas/todos";
+import { mutateCreate } from "@todos/utils/data";
 
 import type { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
